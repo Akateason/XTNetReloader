@@ -7,16 +7,28 @@
 //
 
 #import "ViewController.h"
+#import "XTNetReloader.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+- (IBAction)buttonClicked:(id)sender
+{
+    __block XTNetReloader *netReloader = [[XTNetReloader alloc] initWithFrame:self.view.frame
+                                                                  reloadBlock:^{
+                                                                      NSLog(@"click") ;
+                                                                      [netReloader dismiss] ;
+                                                                  }] ;
+    [netReloader showInView:self.view] ;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
 }
 
 - (void)didReceiveMemoryWarning {

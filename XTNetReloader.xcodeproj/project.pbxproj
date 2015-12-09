@@ -15,6 +15,7 @@
 		D7E8FE341C17E8B4005E908F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7E8FE321C17E8B4005E908F /* LaunchScreen.storyboard */; };
 		D7E8FE3F1C17E8B4005E908F /* XTNetReloaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E8FE3E1C17E8B4005E908F /* XTNetReloaderTests.m */; };
 		D7E8FE4A1C17E8B4005E908F /* XTNetReloaderUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E8FE491C17E8B4005E908F /* XTNetReloaderUITests.m */; };
+		D7E8FE5A1C17E8F9005E908F /* XTNetReloader.m in Sources */ = {isa = PBXBuildFile; fileRef = D7E8FE591C17E8F9005E908F /* XTNetReloader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		D7E8FE451C17E8B4005E908F /* XTNetReloaderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XTNetReloaderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D7E8FE491C17E8B4005E908F /* XTNetReloaderUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XTNetReloaderUITests.m; sourceTree = "<group>"; };
 		D7E8FE4B1C17E8B4005E908F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D7E8FE581C17E8F9005E908F /* XTNetReloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XTNetReloader.h; sourceTree = "<group>"; };
+		D7E8FE591C17E8F9005E908F /* XTNetReloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XTNetReloader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,7 @@
 				D7E8FE281C17E8B4005E908F /* AppDelegate.m */,
 				D7E8FE2A1C17E8B4005E908F /* ViewController.h */,
 				D7E8FE2B1C17E8B4005E908F /* ViewController.m */,
+				D7E8FE571C17E8F9005E908F /* XTNetReloader */,
 				D7E8FE2D1C17E8B4005E908F /* Main.storyboard */,
 				D7E8FE301C17E8B4005E908F /* Assets.xcassets */,
 				D7E8FE321C17E8B4005E908F /* LaunchScreen.storyboard */,
@@ -138,6 +142,15 @@
 				D7E8FE4B1C17E8B4005E908F /* Info.plist */,
 			);
 			path = XTNetReloaderUITests;
+			sourceTree = "<group>";
+		};
+		D7E8FE571C17E8F9005E908F /* XTNetReloader */ = {
+			isa = PBXGroup;
+			children = (
+				D7E8FE581C17E8F9005E908F /* XTNetReloader.h */,
+				D7E8FE591C17E8F9005E908F /* XTNetReloader.m */,
+			);
+			path = XTNetReloader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,6 +286,7 @@
 				D7E8FE2C1C17E8B4005E908F /* ViewController.m in Sources */,
 				D7E8FE291C17E8B4005E908F /* AppDelegate.m in Sources */,
 				D7E8FE261C17E8B4005E908F /* main.m in Sources */,
+				D7E8FE5A1C17E8F9005E908F /* XTNetReloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
