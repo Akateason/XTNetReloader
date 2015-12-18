@@ -21,6 +21,8 @@
                                                                       NSLog(@"click") ;
                                                                       [netReloader dismiss] ;
                                                                   }] ;
+    netReloader.labelName = @"jingdi";
+    netReloader.image = [UIImage imageNamed:@"01"];
     [netReloader showInView:self.view] ;
 
 }

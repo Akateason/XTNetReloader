@@ -13,6 +13,11 @@ typedef void(^ReloadButtonClickBlock)() ;
 
 @interface XTNetReloader : UIView
 
+/** 标签名称 */
+@property (nonatomic, copy) NSString *labelName;
+/** 图片 */
+@property (nonatomic, strong) UIImage *image;
+
 - (instancetype)initWithFrame:(CGRect)frame
                   reloadBlock:(ReloadButtonClickBlock)reloadBlock ;
 
