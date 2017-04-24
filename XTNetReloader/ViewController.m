@@ -20,6 +20,10 @@
     [XTNetReloader showInView:self.view
                   doReRefresh:^{
                        NSLog(@"开始刷新 。。。") ;
+                      // 请求 ...
+                      
+                      // 请求完成后
+                      [XTNetReloader dismiss] ;
                    }] ;
     
 }

@@ -16,5 +16,7 @@
 + (void)showInView:(UIView *)viewWillShow
        doReRefresh:(void(^)(void))doReRefreshBlock ;
 
++ (void)dismiss ;
+
 @end
 
