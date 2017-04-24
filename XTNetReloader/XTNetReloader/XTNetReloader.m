@@ -51,14 +51,16 @@ float const fontSize_bt              = 15.0 ;
     [[XTNetReloader shareInstance] setFrame:viewWillShow.frame] ;
     
     [XTNetReloader  shareInstance].reloadButtonClickBlock = ^{
-        [[XTNetReloader  shareInstance] dismiss] ;
         if (doReRefreshBlock) doReRefreshBlock() ;
     } ;
     
     [[XTNetReloader shareInstance] showFrom:viewWillShow] ;
 }
 
-
++ (void)dismiss
+{
+    [[XTNetReloader shareInstance] dismiss] ;
+}
 
 
 
@@ -81,6 +83,7 @@ float const fontSize_bt              = 15.0 ;
 {
     [viewWillShow addSubview:self] ;
 }
+
 - (void)dismiss
 {
     [self removeFromSuperview] ;
