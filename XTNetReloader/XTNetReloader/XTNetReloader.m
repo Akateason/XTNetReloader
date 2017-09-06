@@ -6,30 +6,14 @@
 //  Copyright © 2015年 teason. All rights reserved.
 //
 #import "XTNetReloader.h"
-
+#import "Masonry.h"
 
 typedef void(^ReloadButtonClickBlock)() ;
 
-NSString *const NO_WIFI_WORDS        = @"网络故障..." ;
-
-float const width_displayNoWifiView  = 200.0 ;
-float const height_displayNoWifiView = 150.0 ;
-
-float const width_labelshow          = 300.0 ;
-float const height_labelshow         = 35.0 ;
-float const fontSize_labelshow       = 17.0 ;
-
-float const flexY_lb_bt              = 10.0 ;
-
-float const width_bt                 = 100.0 ;
-float const height_bt                = 30.0 ;
-float const fontSize_bt              = 15.0 ;
-
-
-
 @interface XTNetReloader ()
 @property (nonatomic,strong) UIImageView *nowifiImgView ;
-@property (nonatomic,strong) UILabel *lb ;
+@property (nonatomic,strong) UILabel *lb1 ;
+@property (nonatomic,strong) UILabel *lb2 ;
 @property (nonatomic,strong) UIButton *bt ;
 @property (nonatomic,copy) ReloadButtonClickBlock reloadButtonClickBlock ;
 - (void)showFrom:(UIView *)viewWillShow ;
@@ -42,32 +26,27 @@ float const fontSize_bt              = 15.0 ;
 
 @implementation XTNetReloader
 
-
 #pragma mark --
 #pragma mark - public
+
 + (void)showInView:(UIView *)viewWillShow
-       doReRefresh:(void(^)(void))doReRefreshBlock
-{
-    [[XTNetReloader shareInstance] setFrame:viewWillShow.frame] ;
-    
+         doRefresh:(void(^)(void))doRefreshBlock
+{    
     [XTNetReloader  shareInstance].reloadButtonClickBlock = ^{
-        if (doReRefreshBlock) doReRefreshBlock() ;
+        if (doRefreshBlock) doRefreshBlock() ;
     } ;
     
     [[XTNetReloader shareInstance] showFrom:viewWillShow] ;
 }
 
-+ (void)dismiss
-{
++ (void)dismiss {
     [[XTNetReloader shareInstance] dismiss] ;
 }
 
-
-
 #pragma mark --
 #pragma mark - private funcs
-+ (XTNetReloader *)shareInstance
-{
+
++ (XTNetReloader *)shareInstance {
     static dispatch_once_t once ;
     static XTNetReloader *singleton ;
     dispatch_once(&once, ^{
@@ -77,105 +56,105 @@ float const fontSize_bt              = 15.0 ;
     return singleton ;
 }
 
-
-
-- (void)showFrom:(UIView *)viewWillShow
-{
+- (void)showFrom:(UIView *)viewWillShow {
     [viewWillShow addSubview:self] ;
+    [self mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(viewWillShow) ;
+    }] ;
 }
 
-- (void)dismiss
-{
-    [self removeFromSuperview] ;
+- (void)dismiss {
+    if (self.superview) [self removeFromSuperview] ;
 }
 
-- (void)layoutSubviews
-{
-    [super layoutSubviews] ;
-    [self prepareFrame] ;
-}
-
-- (void)prepareFrame
-{
-    CGRect rectWifi = CGRectZero ;
-    rectWifi.size = CGSizeMake(width_displayNoWifiView, height_displayNoWifiView) ;
-    rectWifi.origin.x = (self.frame.size.width - width_displayNoWifiView) / 2.0 ;
-    rectWifi.origin.y = (self.frame.size.height - height_displayNoWifiView - height_labelshow - flexY_lb_bt - height_bt) / 2.0 ;
-    self.nowifiImgView.frame = rectWifi ;
-    
-    CGRect rectLabel = CGRectZero ;
-    rectLabel.origin.x = (self.frame.size.width - width_labelshow) / 2.0 ;
-    rectLabel.origin.y = rectWifi.origin.y + rectWifi.size.height ;
-    rectLabel.size = CGSizeMake(width_labelshow, height_labelshow) ;
-    self.lb.frame = rectLabel ;
-    
-    CGRect rectButton = CGRectZero ;
-    rectButton.origin.x = (self.frame.size.width - width_bt) / 2.0 ;
-    rectButton.origin.y = rectLabel.origin.y + rectLabel.size.height + flexY_lb_bt ;
-    rectButton.size = CGSizeMake(width_bt, height_bt) ;
-    self.bt.frame = rectButton ;
-}
-
-- (void)setup
-{
+- (void)setup {
     [self configure] ;
     [self nowifiImgView] ;
-    [self lb] ;
+    [self lb1] ;
+    [self lb2] ;
     [self bt] ;
 }
 
-- (void)configure
-{
+- (void)configure {
     self.backgroundColor = [UIColor whiteColor] ;
 }
 
-- (UIImageView *)nowifiImgView
-{
+- (UIImageView *)nowifiImgView {
     if (!_nowifiImgView) {
-        _nowifiImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"no-wifi"]] ;
+        _nowifiImgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"noWifi"]] ;
         _nowifiImgView.contentMode = UIViewContentModeScaleAspectFit ;
         if (![_nowifiImgView superview]) {
             [self addSubview:_nowifiImgView] ;
+            [_nowifiImgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(148 ) ;
+                make.size.mas_equalTo(CGSizeMake(64 , 47 )) ;
+                make.centerX.equalTo(self) ;
+            }] ;
         }
     }
     return _nowifiImgView ;
 }
 
-- (UILabel *)lb
-{
-    if (!_lb) {
-        _lb = [[UILabel alloc] init] ;
-        _lb.text = NO_WIFI_WORDS ;
-        _lb.font = [UIFont boldSystemFontOfSize:fontSize_labelshow] ;
-        _lb.textAlignment = NSTextAlignmentCenter ;
-        _lb.textColor = [UIColor darkGrayColor] ;
-        if (![_lb superview]) {
-            [self addSubview:_lb] ;
+- (UILabel *)lb1 {
+    if (!_lb1) {
+        _lb1 = [[UILabel alloc] init] ;
+        _lb1.text = @"网络请求失败" ;
+        _lb1.font = [UIFont systemFontOfSize:17 ] ;
+        _lb1.textAlignment = NSTextAlignmentCenter ;
+//        _lb1.textColor = [UIColor inputText1] ;
+        if (![_lb1 superview]) {
+            [self addSubview:_lb1] ;
+            [_lb1 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self) ;
+                make.top.equalTo(self.nowifiImgView.mas_bottom).mas_equalTo(13 ) ;
+            }] ;
         }
     }
-    return _lb ;
+    return _lb1 ;
 }
 
-- (UIButton *)bt
-{
+- (UILabel *)lb2 {
+    if (!_lb2) {
+        _lb2 = [[UILabel alloc] init] ;
+        _lb2.text = @"请检查你的网络" ;
+        _lb2.font = [UIFont systemFontOfSize:15 ] ;
+        _lb2.textAlignment = NSTextAlignmentCenter ;
+//        _lb2.textColor = [UIColor inputText1] ;
+        _lb2.alpha = .5 ;
+        if (![_lb2 superview]) {
+            [self addSubview:_lb2] ;
+            [_lb2 mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self) ;
+                make.top.equalTo(self.lb1.mas_bottom).mas_equalTo(7.5 ) ;
+            }] ;
+        }
+    }
+    return _lb2 ;
+}
+
+- (UIButton *)bt {
     if (!_bt) {
         _bt = [[UIButton alloc] init] ;
         [_bt setTitle:@"重新加载" forState:0] ;
-        [_bt setTitleColor:[UIColor darkGrayColor] forState:0] ;
-        _bt.titleLabel.font = [UIFont systemFontOfSize:fontSize_bt] ;
+        [_bt setTitleColor:[UIColor lightGrayColor] forState:0] ;
+        _bt.titleLabel.font = [UIFont systemFontOfSize:17 ] ;
         _bt.layer.cornerRadius = 5.0f ;
-        _bt.layer.borderWidth = 1.0f ;
-        _bt.layer.borderColor = [UIColor darkGrayColor].CGColor ;
+        _bt.layer.borderWidth = 2.0f ;
+        _bt.layer.borderColor = [UIColor lightGrayColor].CGColor ;
         [_bt addTarget:self action:@selector(reloadButtonClicked) forControlEvents:UIControlEventTouchUpInside] ;
         if (![_bt superview]) {
             [self addSubview:_bt] ;
+            [_bt mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.equalTo(self) ;
+                make.size.mas_equalTo(CGSizeMake(102 , 33 )) ;
+                make.top.equalTo(self.lb2.mas_bottom).mas_equalTo(37 ) ;
+            }] ;
         }
     }
     return _bt ;
 }
 
-- (void)reloadButtonClicked
-{
+- (void)reloadButtonClicked {
     if (self.reloadButtonClickBlock) {
         self.reloadButtonClickBlock() ;
     }

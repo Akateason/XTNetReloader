@@ -18,7 +18,7 @@
 - (IBAction)buttonClicked:(id)sender
 {
     [XTNetReloader showInView:self.view
-                  doReRefresh:^{
+                    doRefresh:^{
                        NSLog(@"开始刷新 。。。") ;
                       // 请求 ...
                       
